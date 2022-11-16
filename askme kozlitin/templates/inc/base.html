@@ -1,0 +1,100 @@
+<!doctype html>
+
+{% load static %}
+
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sticky Footer Navbar Template · Bootstrap v5.2</title>
+
+    <link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+      <link href="{% static "css/style.css" %}" rel="stylesheet">
+  </head>
+  <body class="d-flex flex-column h-100">
+    
+<header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'index' user_id=user.id %}">AskMe</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarCollapse">
+        <a href="{% url 'ask' user_id=user.id %}"><button type="button" class="btn btn-primary me-4 mb-2 mb-md-0">ASK!</button></a>
+        <form class="d-flex me-4 mb-2 mb-md-0" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        </form>
+      </div>
+
+        {% if user.is_auth %}
+
+        <div class="d-flex gap-3 py-3" aria-current="true">
+            <img src="{% static user.avatar %}" alt="twbs" width="44" height="44" class="rounded-circle flex-shrink-0">
+            <ul class="list-group">
+                <p class="mb-1 text text-light">{{ user.nickname }}</p>
+                <ul class="gap-3 list-group list-group-horizontal">
+                    <li><a href="{% url 'settings' user_id=user.id %}">settings</a></li>
+                    <li><a href="{% url 'index' user_id=0 %}">log out</a></li>
+                </ul>
+            </ul>
+        </div>
+
+        {% else %}
+
+        <div class="text">
+            <a href="{% url 'login' user_id=user.id %}"><button type="button" class="btn btn-outline-light me-2">Login</button></a>
+            <a href="{% url 'register' user_id=user.id %}"><button type="button" class="btn btn-warning">Register</button></a>
+        </div>
+
+        {% endif %}
+
+    </div>
+  </nav>
+</header>
+
+<!-- Begin page content -->
+<main role="main" class="flex-shrink-0 container logged">
+
+    <div class="row">
+        <div class="col-md-8 blog-main">
+            {% block content %}
+            {% endblock %}
+        </div><!-- /.blog-main -->
+
+        <aside class="col-md-4 blog-sidebar">
+
+            <div class="p-3">
+                <h4 class="font-italic">Popular Tags</h4>
+                    {% for tag in tags_popular %}
+                        {% include 'inc/tag.html' %}
+                    {% endfor %}
+            </div>
+
+            <div class="p-3">
+                <h4 class="font-italic">Best Members</h4>
+                <ol class="list-unstyled">
+                    {% for user in users_popular %}
+                        <li class="py-1 border-bottom"><a href="#">{{ user.nickname }}</a></li>
+                    {% endfor %}
+                </ol>
+            </div>
+
+        </aside><!-- /.blog-sidebar -->
+
+    </div><!-- /.row -->
+  
+</main><!-- /.container -->
+
+<footer class="footer mt-auto py-3 bg-light">
+  <div class="container">
+    <span class="text-muted">Place sticky footer content here.</span>
+  </div>
+</footer>
+
+      
+  </body>
+</html>
