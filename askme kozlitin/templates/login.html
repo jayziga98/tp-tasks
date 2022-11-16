@@ -1,0 +1,37 @@
+{% extends "inc/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    <h1 class="h3 py-3 mb-3 font-weight-normal">Please sign in</h1>
+    <p class="text-danger">Sorry, wrong password!</p>
+    <div class="form-group row py-1 g-2">
+        <div class="col-sm-2">
+            <label for="inputEmail" class="mb-3 sr-only">Email address</label>
+        </div>
+        <div class="col-sm-4">
+            <input type="email" id="inputEmail" class="mb-3 form-control" placeholder="Email address" required autofocus>
+        </div>
+    </div>
+    <div class="form-group row py-1 g-2">
+        <div class="col-sm-2">
+            <label for="inputPassword" class="mb-3 sr-only">Password</label>
+        </div>
+        <div class="col-sm-4">
+            <input type="password" id="inputPassword" class="mb-3 form-control" placeholder="Password" required>
+        </div>
+    </div>
+
+    <div class="form-group row py-1 g-2">
+        <div class="col-sm-2 mb-3"></div>
+        <button class="col-sm-2 mb-3 btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </div>
+    <div class="form-group row py-1 g-2">
+        <div class="col-sm-2 mb-3"></div>
+        <div class="col-sm-3">
+            <h5><a href="{% url 'register' %}">create account</a></h5>
+        </div>
+    </div>
+
+{% endblock %}

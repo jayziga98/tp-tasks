@@ -1,0 +1,20 @@
+{% extends "inc/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="py-3 border-bottom">
+        <h3>
+            New questions
+            <small><a class="link-danger" href="#">Hot questions</a></small>
+        </h3>
+    </div>
+
+    {% for question in page_obj %}
+        {% include "inc/question_item.html" %}
+    {% endfor %}
+
+    {% include 'inc/paginator.html' %}
+
+{% endblock %}

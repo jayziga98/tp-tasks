@@ -1,0 +1,67 @@
+{% extends "inc/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    {% if user.id %}
+
+        <h2 class="py-3 mb-3 border-bottom">Settings: {{ user.nickname }}</h2>
+        <form class="needs-validation" novalidate>
+          <div class="row py-3 g-3">
+
+            <div class="form-group row py-1 g-2">
+                <div class="col-sm-2">
+                    <label for="inputLogin" class="col-sm-2 col-form-label">Login</label>
+                </div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputLogin" placeholder={{ user.login }}>
+                </div>
+            </div>
+
+            <div class="form-group row py-1 g-2">
+                <div class="col-sm-2">
+                    <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                </div>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="inputEmail" placeholder={{ user.email }}>
+                </div>
+            </div>
+
+            <div class="form-group row py-1 g-2">
+                <div class="col-sm-2">
+                    <label for="inputNickName" class="col-sm-2 col-form-label">NickName</label>
+                </div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputNickName" placeholder={{ user.nickname }}>
+                </div>
+            </div>
+
+            <div class="form-group row py-1 g-2">
+                <div class="col-sm-2">
+                    <label for="inputNickName" class="col-sm-2 col-form-label">Upload Avatar</label>
+                </div>
+                <div class="col-sm-10 custom-file">
+                    <img src={% static user.avatar %} alt="Avatar" class="img-thumbnail">
+                    <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                  </div>
+            </div>
+
+          </div>
+
+          <div class="form-group row py-1 g-2">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+            <button class="btn btn-primary btn-lg" type="submit">Save</button>
+            </div>
+          </div>
+        </form>
+
+    {% else %}
+
+    <div class="text text-danger">Настройки доступны только авторизованным пользователям</div>
+
+    {% endif %}
+
+{% endblock %}

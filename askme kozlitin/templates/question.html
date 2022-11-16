@@ -1,0 +1,54 @@
+{% extends "inc/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="question-main row border-bottom">
+        <div class="d-flex gap-3 py-3" aria-current="true">
+            <div class="d-flex gap-3">
+                <img src="{% static question.user.avatar %}" alt="twbs" width="72" height="72" class="rounded-circle flex-shrink-0">
+                <h1 class="col-11 mb-0"><a href="#">{{ question.title }}</a></h1>
+            </div>
+        </div>
+
+        <div class="d-flex gap-3">
+            <div class="rating col-1 justify-content-center">
+                <div class="text text-center">
+                    <div class="btn-group" role="group" aria-label="Rating">
+                        <button type="button" class="btn btn-outline-danger btn-sm">-</button>
+                        <input type="text" readonly class="form-control-plaintext border-dark" id="staticRating" value="30">
+                        <button type="button" class="btn btn-outline-success btn-sm">+</button>
+                    </div>
+                </div>
+            </div>
+            <p class="col-11 mb-0 opacity-75">{{ question.content }}</p>
+        </div>
+
+        <div class="d-flex gap-3 py-3" aria-current="true">
+            <div class="col-1"></div>
+            <div class="col-8 text-left">
+                <p class="font-italic">Tags:
+                    {% for tag in question.tags %}
+                        {% include 'inc/tag.html' %}
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- /.question -->
+
+    <div class="answers row border-bottom">
+        {% for answer in page_obj %}
+            {% include 'inc/answer_item.html' %}
+        {% endfor %}
+    </div>
+
+    <div class="NewAnswer row">
+        <textarea class="form-control" id="NewQuestionText" rows="6" placeholder="Your answer"></textarea>
+        <div class="NewAnswer"><button class="btn btn-primary" type="submit">Answer</button></div>
+    </div>
+
+    {% include 'inc/paginator.html' %}
+
+{% endblock %}
